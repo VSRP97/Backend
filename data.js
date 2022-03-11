@@ -22,6 +22,18 @@ const data = {
     ],
     mission_objectives_index: 1,
 
+    characters: [
+        {
+            id: 1,
+            name: 'Thomas Anderson',
+            stats: '1',
+            level: 999,
+            title: 'The Chosen One',
+            model: 'Keanu Reeves'
+        }
+    ],
+    characters_index: 1,
+
     player_characters: [
         {
             id: 1,
