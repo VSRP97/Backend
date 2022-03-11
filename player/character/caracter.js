@@ -3,12 +3,17 @@ const router = express.Router()
 const data = require('../../data')
 
 router.get('/', async (req, res) => {
+    let list = data.characters
+    list.map(d => d['expanded_stats'] = data.character_stats.filter(n => n.id == d.stats))
     res.status(200).json(data.characters)
 })
 
 router.get('/:id/', async (req, res) => {
+    let list
     try {
         let id = +req.params.id
+        list = data.characters.filter(n => n.id === id)
+        list.map(d => d['expanded_stats'] = data.character_stats.filter(n => n.id == d.stats))
         res.status(200).json(data.characters.filter(n => n.id === id))
     } catch (error) {
         res.status(404).json({'message':'failure'})
