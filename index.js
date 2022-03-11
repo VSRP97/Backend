@@ -1,6 +1,11 @@
-const express = require('express')
-const app = express()
+const express= require('express');
+
+let app=express()
 
 app.use(express.json())
 
-app.listen(8080);
+app.get('/',async(req,res)=>{
+res.send('Funciona');
+});
+
+app.listen(8000);
