@@ -16,4 +16,6 @@ description:'Common arrow',
 image:'imagen3',
 sell_price:12000
 }
-]
+];
+
+module.exports=items;
