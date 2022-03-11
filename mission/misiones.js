@@ -5,11 +5,11 @@ const data = require('../data')
 router.get('/', async (req, res) => {
     let list
     if (req.query.quest_giver_character) {
-        list = data.missions.filter(n => n.quest_giver_character === req.query.quest_giver_character)
+        list = JSON.parse(JSON.stringify(data.missions.filter(n => n.quest_giver_character === req.query.quest_giver_character)))
         list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
         res.status(200).json(list)
     }else{
-        list = data.missions
+        list = JSON.parse(JSON.stringify(data.missions))
         list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
         res.status(200).json(list)
     }
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         let id = +req.params.id
-        let list = data.missions.filter(n => n.id === id)
+        let list = JSON.parse(JSON.stringify(data.missions.filter(n => n.id === id)))
         list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
         res.status(200).json(list)
     } catch (error) {

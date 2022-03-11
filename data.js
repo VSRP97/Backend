@@ -34,6 +34,18 @@ const data = {
     ],
     characters_index: 1,
 
+    items: [
+        {
+        id: 1,
+        name: 'The Cube',
+        level: 100,
+        description: 'THE CUBE',
+        image: 'CUBE',
+        sell_price: 420
+        }
+    ],
+    items_index: 1,
+
     player_characters: [
         {
             id: 1,
