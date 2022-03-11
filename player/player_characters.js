@@ -12,15 +12,8 @@ router.get('/',async (req,res) => {
 });
 
 router.post('/',async (req,res) => {
-    const play_char = {
-        id: data.player_characters_index + 1,
-        name: req.query.name,
-        stats: req.query.stats,
-        level: req.query.level,
-        title: req.query.title,
-        model: req.query.model,
-        player: req.query.player
-    }
+    const play_char = get_play_char(req)
+    play_char.id = data.player_character_index + 1
     if (has_all_parameters(play_char)){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
@@ -30,7 +23,8 @@ router.post('/',async (req,res) => {
             message: "User added.", 
             object: play_char
         })
-        data.player_character_index += 1        
+        console.log(data.player_character_index)
+        data.player_character_index += 1
     }
 });
 
@@ -42,7 +36,7 @@ router.delete('/',async (req,res) => {
         if (!play_char) {
             res.status(422).json({message: "Invalid request. Non-existing player character."})
         } else {
-            data.player_characters.splice(data.player_characters.indexOf(play_char))
+            data.player_characters.splice(data.player_characters.indexOf(play_char), 1)
             res.status(200).json({
                 message: "Player character deleted.", 
                 object: play_char

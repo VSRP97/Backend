@@ -12,15 +12,8 @@ router.get('/',async (req,res) => {
 });
 
 router.post('/',async (req,res) => {
-    const player = {
-        id: data.players_index + 1,
-        name: req.query.name,
-        stats: req.query.stats,
-        level: req.query.level,
-        title: req.query.title,
-        model: req.query.model,
-        player: req.query.player
-    }
+    const player = get_player(req)
+    player.id = data.player_index + 1
     if (has_all_parameters(player)){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
@@ -30,7 +23,7 @@ router.post('/',async (req,res) => {
             message: "User added.", 
             object: player
         })
-        data.player_character_index += 1        
+        data.player_index += 1        
     }
 });
 
@@ -42,7 +35,7 @@ router.delete('/',async (req,res) => {
         if (!player) {
             res.status(422).json({message: "Invalid request. Non-existing player character."})
         } else {
-            data.players.splice(data.players.indexOf(player))
+            data.players.splice(data.players.indexOf(player), 1)
             res.status(200).json({
                 message: "Player character deleted.", 
                 object: player
@@ -73,17 +66,14 @@ router.patch('/',async (req,res) => {
 function get_player(req) {
     return {
         name: req.query.name,
-        stats: req.query.stats,
-        level: req.query.level,
-        title: req.query.title,
-        model: req.query.model,
-        player: req.query.player
+        last_login: req.query.last_login,
+        password: req.query.password,
+        username: req.query.username
     }
 }
 
 function has_all_parameters(player) {
-    return !player.name || !player.stats || !player.level ||
-    !player.title || !player.model || !player.player
+    return !player.name || !player.last_login || !player.password || !player.username
 }
 
 module.exports = router

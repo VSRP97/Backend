@@ -42,6 +42,7 @@ const data = {
             player: "idk x2"
         }
     ],
+
     players: [
         {
             id: 1,
@@ -51,8 +52,21 @@ const data = {
             username: "user.name"
         }
     ],
+    
+    character_stats: [
+        {
+            id: 1,
+            attribute_1: 2,
+            attribute_2: 3,
+            attribute_3: 4,
+            life: 20 * 2,
+            power: 2 * 10 + 3 * 25,
+            magic: 4 * 100           
+        }
+    ],
     player_character_index: 2,
-    player_index: 1
+    player_index: 1,
+    character_stat_index: 1
 }
 
 module.exports = data
