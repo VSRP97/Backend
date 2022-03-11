@@ -15,6 +15,19 @@ router.get('/:id/', async (req, res) => {
     }
 })
 
+router.get('/:id/images_2d', async (req, res) => {
+    let list
+    try {
+        let id = +req.params.id
+        let images
+        list = JSON.parse(JSON.stringify(data.items.filter(n => n.id === id)))
+        images = data.images_2d.filter(n => n.id == list[0].image)
+        res.status(200).json(images)
+    } catch (error) {
+        res.status(404).json({'message':'failure'})
+    }
+})
+
 router.post('/', async (req, res) => {
     if (req.query.name && req.query.level && req.query.description && req.query.image && req.query.sell_price) {
         let dict = {

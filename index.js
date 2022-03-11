@@ -10,6 +10,8 @@ const play_char = require('./player/player_characters.js')
 const player = require('./player/player.js')
 const character_stats = require("./player/character/character_stats.js")
 const items = require('./items/items')
+const models_3d = require('./assets/models_3d')
+const images_2d = require('./assets/images_2d')
 
 app.use('/missions', missions)
 app.use('/mission_objectives', mission_objectives)
@@ -18,6 +20,8 @@ app.use('/player_character', play_char)
 app.use('/player', player)
 app.use('/character_stat', character_stats)
 app.use('/items', items)
+app.use('/models_3d', models_3d)
+app.use('/images_2d', images_2d)
 
 app.get('/',async(req,res)=>{
     res.status(200).json({'message':'success'})

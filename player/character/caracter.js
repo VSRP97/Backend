@@ -20,6 +20,19 @@ router.get('/:id/', async (req, res) => {
     }
 })
 
+router.get('/:id/models_3d', async (req, res) => {
+    let list
+    try {
+        let id = +req.params.id
+        let models
+        list = JSON.parse(JSON.stringify(data.characters.filter(n => n.id === id)))
+        models = data.models_3d.filter(n => n.id == list[0].model)
+        res.status(200).json(models)
+    } catch (error) {
+        res.status(404).json({'message':'failure'})
+    }
+})
+
 router.get('/:id/missions', async (req, res) => {
     try {
         let id = +req.params.id

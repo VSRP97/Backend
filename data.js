@@ -29,7 +29,7 @@ const data = {
             stats: '1',
             level: 999,
             title: 'The Chosen One',
-            model: 'Keanu Reeves'
+            model: '1'
         }
     ],
     characters_index: 1,
@@ -40,11 +40,27 @@ const data = {
         name: 'The Cube',
         level: 100,
         description: 'THE CUBE',
-        image: 'CUBE',
+        image: '1',
         sell_price: 420
         }
     ],
     items_index: 1,
+
+    models_3d: [
+        {
+            id: 1,
+            address: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        }
+    ],
+    models_3d_index: 1,
+
+    images_2d: [
+        {
+            id: 1,
+            address: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        }
+    ],
+    images_2d_index: 1,
 
     player_characters: [
         {
