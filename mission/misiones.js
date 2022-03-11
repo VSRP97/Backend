@@ -28,4 +28,40 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    let id = +req.params.id
+    const len = data.missions.length
+    data.missions = data.missions.filter(n => n.id !== id)
+    if (len === data.missions.length) {
+        res.status(404).json({Message: 'Failure'})
+    }else{
+        res.status(200).json({Message: 'Success'})
+    }
+})
+
+router.patch('/:id', async (req, res) => {
+    let id = +req.params.id
+    index = data.missions.findIndex(i => i.id === id)
+    if (index !== -1){
+        if (req.query.name) {
+            data.missions[index].name = req.query.name
+        }
+        if (req.query.description) {
+            data.missions[index].description = req.query.description
+        }
+        if (req.query.level_reward) {
+            data.missions[index].level_reward = req.query.level_reward
+        }
+        if (req.query.level_requirement) {
+            data.missions[index].level_requirement = req.query.level_requirement
+        }
+        if (req.query.quest_giver_character) {
+            data.missions[index].quest_giver_character = req.query.quest_giver_character
+        }
+        res.status(200).json({Message: 'Success'})
+    }else{
+        res.status(404).json({Message: 'Failure'})
+    }
+})
+
 module.exports = router

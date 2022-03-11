@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.3",
@@ -20,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/VSoulRP/Backend/issues"
   },
-  "homepage": "https://github.com/VSoulRP/Backend#readme"
+  "homepage": "https://github.com/VSoulRP/Backend#readme",
+  "description": ""
 }
