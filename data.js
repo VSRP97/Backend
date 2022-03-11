@@ -59,7 +59,7 @@ const data = {
         {
             id: 1,
             name: "a name",
-            last_login: "some time",
+            last_login: new Date("2020-09-15"),
             password: "password1234",
             username: "user.name"
         }
