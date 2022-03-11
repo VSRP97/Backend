@@ -42,7 +42,17 @@ const data = {
             player: "idk x2"
         }
     ],
-    player_character_index: 2
+    players: [
+        {
+            id: 1,
+            name: "a name",
+            last_login: "some time",
+            password: "password1234",
+            username: "user.name"
+        }
+    ],
+    player_character_index: 2,
+    player_index: 1
 }
 
 module.exports = data

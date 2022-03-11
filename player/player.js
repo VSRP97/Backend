@@ -12,8 +12,8 @@ router.get('/',async (req,res) => {
 });
 
 router.post('/',async (req,res) => {
-    const play_char = {
-        id: data.player_characters_index + 1,
+    const player = {
+        id: data.players_index + 1,
         name: req.query.name,
         stats: req.query.stats,
         level: req.query.level,
@@ -21,14 +21,14 @@ router.post('/',async (req,res) => {
         model: req.query.model,
         player: req.query.player
     }
-    if (has_all_parameters(play_char)){
+    if (has_all_parameters(player)){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
         
-        data.player_characters.push(play_char)
+        data.players.push(player)
         res.status(200).json({
             message: "User added.", 
-            object: play_char
+            object: player
         })
         data.player_character_index += 1        
     }
@@ -38,39 +38,39 @@ router.delete('/',async (req,res) => {
     if (!req.query.id){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
-        play_char = data.player_characters.find(x => x.id == req.query.id)
-        if (!play_char) {
+        player = data.players.find(x => x.id == req.query.id)
+        if (!player) {
             res.status(422).json({message: "Invalid request. Non-existing player character."})
         } else {
-            data.player_characters.splice(data.player_characters.indexOf(play_char))
+            data.players.splice(data.players.indexOf(player))
             res.status(200).json({
                 message: "Player character deleted.", 
-                object: play_char
+                object: player
             })
         }
     }
 });
 
 router.patch('/',async (req,res) => {
-    play_char = get_play_char(req)
-    play_char.id = req.query.id
-    if (has_all_parameters(play_char) || !play_char.id){
+    player = get_player(req)
+    player.id = req.query.id
+    if (has_all_parameters(player) || !player.id){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
-        old_play_char = data.player_characters.find(x => x.id == req.query.id)
-        if (!old_play_char) {
+        old_player = data.players.find(x => x.id == req.query.id)
+        if (!old_player) {
             res.status(422).json({message: "Invalid request. Non-existing user."})
         } else {
-            data.player_characters[data.player_characters.indexOf(old_play_char)] = play_char
+            data.players[data.players.indexOf(old_player)] = player
             res.status(200).json({
                 message: "User updated.", 
-                object: play_char
+                object: player
             })
         }
     }
 });
 
-function get_play_char(req) {
+function get_player(req) {
     return {
         name: req.query.name,
         stats: req.query.stats,
@@ -82,8 +82,8 @@ function get_play_char(req) {
 }
 
 function has_all_parameters(player) {
-    return !play_char.name || !play_char.stats || !play_char.level ||
-    !play_char.title || !play_char.model || !play_char.player
+    return !player.name || !player.stats || !player.level ||
+    !player.title || !player.model || !player.player
 }
 
 module.exports = router
