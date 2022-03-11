@@ -13,4 +13,5 @@ app.use(express.json())
 // });
 app.use('/items',item);
 
+app.use('/items/:name/:id/:level/:des/:image/:sell',item)
 app.listen(8000);
