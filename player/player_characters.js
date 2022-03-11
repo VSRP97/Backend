@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-// const data = require("./data")
+const data = require("../data.js")
 
 router.get('/',async (req,res) => {
     if (req.query.id == null){
@@ -13,7 +13,7 @@ router.get('/',async (req,res) => {
 
 router.post('/',async (req,res) => {
     const play_char = {
-        id: data.player_characters_index + 1
+        id: data.player_characters_index + 1,
         name: req.query.name,
         stats: req.query.stats,
         level: req.query.level,
