@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     if (req.query.name && req.query.description && req.query.level_reward && req.query.level_requirement && req.query.quest_giver_character) {
         let dict = {
+            id: data.missions_index+1,
             name: req.query.name,
             description: req.query.description,
             level_reward: +req.query.level_reward,
@@ -21,6 +22,7 @@ router.post('/', async (req, res) => {
         }
         data.missions.push(dict)
         res.status(201).json({'message':'success'})
+        data.missions_index += 1
     }else{
         res.status(404).json({'message':'failure'})
     }
