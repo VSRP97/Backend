@@ -3,10 +3,26 @@ const router = express.Router()
 const data = require('../data')
 
 router.get('/', async (req, res) => {
+    let list
     if (req.query.quest_giver_character) {
-        res.status(200).json(data.missions.filter(n => n.quest_giver_character === req.query.quest_giver_character))
+        list = data.missions.filter(n => n.quest_giver_character === req.query.quest_giver_character)
+        list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
+        res.status(200).json(list)
     }else{
-        res.status(200).json(data.missions)
+        list = data.missions
+        list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
+        res.status(200).json(list)
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        let id = +req.params.id
+        let list = data.missions.filter(n => n.id === id)
+        list.map(d => d['objectives'] = data.mission_objectives.filter(n => n.mission === d.name))
+        res.status(200).json(list)
+    } catch (error) {
+        res.status(404).json({'message':'failure'})
     }
 })
 
@@ -50,10 +66,10 @@ router.patch('/:id', async (req, res) => {
             data.missions[index].description = req.query.description
         }
         if (req.query.level_reward) {
-            data.missions[index].level_reward = req.query.level_reward
+            data.missions[index].level_reward = +req.query.level_reward
         }
         if (req.query.level_requirement) {
-            data.missions[index].level_requirement = req.query.level_requirement
+            data.missions[index].level_requirement = +req.query.level_requirement
         }
         if (req.query.quest_giver_character) {
             data.missions[index].quest_giver_character = req.query.quest_giver_character

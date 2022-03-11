@@ -10,7 +10,18 @@ const data = {
         }
     ],
     missions_index: 1,
-    
+
+    mission_objectives: [
+        {
+            id: 1,
+            name: 'The end of the beginning',
+            description: 'It ends?',
+            count: 1,
+            mission: 'The beginning of the end'
+        }
+    ],
+    mission_objectives_index: 1,
+
     player_characters: [
         {
             id: 1,
