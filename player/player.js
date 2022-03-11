@@ -45,19 +45,21 @@ router.delete('/',async (req,res) => {
 });
 
 router.patch('/',async (req,res) => {
-    player = get_player(req)
+    player = get_player_patch(req)
     player.id = req.query.id
-    if (has_all_parameters(player) || !player.id){
+    if (has_all_parameters_patch(player)|| !player.id){
         res.status(422).json({message: "Invalid request. Not enough parameters"})
     } else {
         old_player = data.players.find(x => x.id == req.query.id)
         if (!old_player) {
             res.status(422).json({message: "Invalid request. Non-existing user."})
         } else {
-            data.players[data.players.indexOf(old_player)] = player
+            old_player.name = player.name
+            old_player.password = player.password
+            data.players[data.players.indexOf(old_player)] = old_player
             res.status(200).json({
                 message: "User updated.", 
-                object: player
+                object: old_player
             })
         }
     }
@@ -72,8 +74,19 @@ function get_player(req) {
     }
 }
 
+function get_player_patch(req) {
+    return {
+        password: req.query.password,
+        name: req.query.name
+    }
+}
+
 function has_all_parameters(player) {
     return !player.name || !player.last_login || !player.password || !player.username
+}
+
+function has_all_parameters_patch(player) {
+    return !player.password || !player.name
 }
 
 module.exports = router
